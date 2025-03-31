@@ -36,18 +36,20 @@ with st.sidebar:
         "Groq API Key", value="", type="password", label_visibility="collapsed"
     )
 
-llm = ChatGroq(groq_api_key=groq_api_key, model_name="Gemma2-9b-It")
-
-session_id = st.text_input("Session ID", value="default_session")
-
-if "store" not in st.session_state:
-    st.session_state.store = {}
-
 uploaded_files = st.file_uploader(
     "Choose a PDF file", type="pdf", accept_multiple_files=True
 )
 
-if uploaded_files:
+
+if uploaded_files and groq_api_key:
+
+    llm = ChatGroq(groq_api_key=groq_api_key, model_name="Gemma2-9b-It")
+
+    session_id = st.text_input("Session ID", value="default_session")
+
+    if "store" not in st.session_state:
+        st.session_state.store = {}
+
     documents = []
     for uploaded_file in uploaded_files:
         temppdf = "./temp.pdf"
