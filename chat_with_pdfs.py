@@ -137,3 +137,5 @@ if uploaded_files and groq_api_key:
                 )
                 st.write("Assistant:", response["answer"])
                 st.write("Chat History:", session_history.messages)
+else:
+    st.write("Enter Groq API key to chat with pdf files")
